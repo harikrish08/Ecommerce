@@ -1,0 +1,39 @@
+
+
+{% extends 'base.html' %}
+{% load static % }
+{% block metadescription %}
+    {{product.desc|truncatewords:155}}
+{{% endblock %}
+{% block title %}
+    {% if category %}
+        {{product.name}} - ShopWise
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div>
+        <div>
+            <p><a href="{% url 'ecommerce:AllProdCat' %}">Home</a> | <a href="{{product.category.get_url}}">{{product.category}}</a>|{{product.name}}</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div style="min-width:18rem">
+                <img src="{{product.image.url}}" alt="{{product.name}}" width=250px">
+            </div>
+</div>
+    <div class="col-md-6 prod_detail">
+        <h4 class="my_prod_title">{{product.name}}</h4>
+         <p>{{product.price}}</p>
+         <p class="text_title">Product Description</p>
+          <p class="text-justify prod_desc">{{product.desc}}</p>
+          {% if product.stock <= 0 %}
+          <h3 class="stock"><b>Out of stock</b></h3>
+          {% else %}
+          <a href="{% url 'cart:add_cart' product.id %}" class="btn btn-success">Add to cart</a>
+          {% endif %}
+     </div>
+             </div>
+{% endblock %}
+</div>

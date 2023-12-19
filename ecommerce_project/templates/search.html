@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+    SHOPWISE.You can shop everything
+
+{% endblock %}
+
+{% block title %}
+
+    Search
+
+{% endblock %}
+
+{% block content %}
+<div>
+    <p class="text-center my_search_text">You have searched for<b>"{{query}}"</b> </p>
+</div>
+<div class="container">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="card">
+                        <a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}" width="250px"></a>
+
+            <div class="card-body">
+                <h4>{{product.name}}</h4>
+                 <p>{{product.price}}</p>
+            </div>
+                             </div>
+                </div>
+            {% empty %}
+            <div>
+                <p class="text-center my_search_text">0 results found for <b>"{{query}}"</b></p>
+            </div>
+            {% endfor %}
+            </div>
+</div>
+{% endblock %}
